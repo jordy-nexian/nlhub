@@ -32,21 +32,27 @@ export async function sendWebhook(event: string, payload: Record<string, unknown
     return null;
   }
 
-  const response = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ event, ...payload }),
-    cache: "no-store"
-  });
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ event, ...payload }),
+      cache: "no-store"
+    });
 
-  if (!response.ok) {
-    throw new Error(`Webhook request failed for ${event}: ${response.status} ${response.statusText}`);
-  }
+    if (!response.ok) {
+      console.error(`Webhook request failed for ${event}: ${response.status} ${response.statusText}`);
+      return null;
+    }
 
-  const contentType = response.headers.get("content-type") ?? "";
-  if (!contentType.includes("application/json")) {
+    const contentType = response.headers.get("content-type") ?? "";
+    if (!contentType.includes("application/json")) {
+      return null;
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error(`Webhook request errored for ${event}`, error);
     return null;
   }
-
-  return response.json();
 }
