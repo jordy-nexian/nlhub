@@ -31,6 +31,21 @@
   margin-top: 28px;
 }
 
+.section {
+  display: grid;
+  gap: 8px;
+}
+
+.sectionLabel {
+  margin: 0 0 2px;
+  padding: 0 12px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 .nav a,
 .nav form button {
   width: 100%;
@@ -40,6 +55,29 @@
   padding: 12px 14px;
   background: transparent;
   color: #4a617d;
+}
+
+.submenu,
+.submenuOpen {
+  display: grid;
+  gap: 6px;
+  padding-left: 12px;
+  border-left: 2px solid #e3ebf3;
+  margin-left: 12px;
+}
+
+.subnav,
+.subnavActive {
+  display: block;
+  border-radius: 12px;
+  padding: 10px 12px !important;
+  color: #5d738c !important;
+}
+
+.subnavActive {
+  background: #eef6ff !important;
+  color: #195187 !important;
+  font-weight: 700;
 }
 
 .nav a:hover,

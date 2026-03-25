@@ -13,13 +13,13 @@ export default async function AdminPage() {
   const webhook = settings.find((setting) => setting.key === "booking_webhook_url")?.value;
 
   return (
-    <AdminShell current="/admin" subtitle="Operational overview for trainers and coordinators." title="Dashboard">
+    <AdminShell current="/admin" subtitle="A shared workspace for training, resourcing, and internal legal operations requests." title="Hub Dashboard">
       <section style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: 16 }}>
         {[
-          ["Customers", String(customers.length)],
-          ["Sessions", String(sessions.length)],
-          ["Booked", String(booked)],
-          ["Available", String(available)]
+          ["Training customers", String(customers.length)],
+          ["Training sessions", String(sessions.length)],
+          ["Booked delivery", String(booked)],
+          ["Open capacity", String(available)]
         ].map(([label, value]) => (
           <article key={label} style={{ padding: 20, background: "white", border: "1px solid var(--border)", borderRadius: 20, boxShadow: "var(--shadow)" }}>
             <p style={{ color: "var(--muted)", marginBottom: 10 }}>{label}</p>
@@ -30,7 +30,7 @@ export default async function AdminPage() {
 
       <section style={{ display: "grid", gridTemplateColumns: "1.1fr 0.9fr", gap: 18, marginTop: 18 }}>
         <article style={{ padding: 22, background: "white", border: "1px solid var(--border)", borderRadius: 24, boxShadow: "var(--shadow)" }}>
-          <h2>Upcoming sessions</h2>
+          <h2>Training activity</h2>
           {sessions.slice(0, 5).map((session) => (
             <div key={session.id} style={{ padding: "16px 0", borderTop: "1px solid var(--border)" }}>
               <strong>{session.title}</strong>
@@ -43,11 +43,12 @@ export default async function AdminPage() {
         </article>
 
         <article style={{ padding: 22, background: "white", border: "1px solid var(--border)", borderRadius: 24, boxShadow: "var(--shadow)" }}>
-          <h2>Quick links</h2>
+          <h2>Hub quick links</h2>
           <div style={{ display: "grid", gap: 12 }}>
-            <Link href="/admin/customers/new">Add new customer</Link>
-            <Link href="/admin/sessions/new">Create new session</Link>
-            <Link href="/admin/settings">Manage webhooks</Link>
+            <Link href="/admin/resourcing">Open resourcing calendar</Link>
+            <Link href="/admin/technology-requests">Open technology request template</Link>
+            <Link href="/admin/sessions/new">Create training session</Link>
+            <Link href="/admin/customers/new">Add training customer</Link>
           </div>
           <div style={{ marginTop: 18, padding: 16, borderRadius: 18, background: "var(--surface-2)" }}>
             <p style={{ color: "var(--muted)", marginBottom: 6 }}>Webhook status</p>

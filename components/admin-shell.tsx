@@ -10,36 +10,75 @@ type AdminShellProps = {
 };
 
 export async function AdminShell({ title, subtitle, current, children }: AdminShellProps) {
+  const trainingOpen =
+    current === "/admin/customers" ||
+    current === "/admin/customers/new" ||
+    current === "/admin/sessions" ||
+    current === "/admin/sessions/new" ||
+    current === "/admin/registrations";
+
   return (
     <main className={styles.page}>
       <aside className={styles.sidebar}>
         <div className={styles.brand}>
-          Nexian Training
-          <span>Actionstep Admin</span>
+          Nexian Legal Hub
+          <span>Operations Workspace</span>
         </div>
 
         <nav className={styles.nav}>
-          <Link className={current === "/admin" ? styles.navActive : ""} href="/admin">
-            Dashboard
-          </Link>
-          <Link className={current === "/admin/customers" ? styles.navActive : ""} href="/admin/customers">
-            Customers
-          </Link>
-          <Link className={current === "/admin/customers/new" ? styles.navActive : ""} href="/admin/customers/new">
-            New customer
-          </Link>
-          <Link className={current === "/admin/sessions" ? styles.navActive : ""} href="/admin/sessions">
-            Sessions
-          </Link>
-          <Link className={current === "/admin/sessions/new" ? styles.navActive : ""} href="/admin/sessions/new">
-            New session
-          </Link>
-          <Link className={current === "/admin/registrations" ? styles.navActive : ""} href="/admin/registrations">
-            Registrations
-          </Link>
-          <Link className={current === "/admin/settings" ? styles.navActive : ""} href="/admin/settings">
-            Settings
-          </Link>
+          <div className={styles.section}>
+            <p className={styles.sectionLabel}>Overview</p>
+            <Link className={current === "/admin" ? styles.navActive : ""} href="/admin">
+              Hub dashboard
+            </Link>
+          </div>
+
+          <div className={styles.section}>
+            <p className={styles.sectionLabel}>Operations</p>
+            <Link className={current === "/admin/resourcing" ? styles.navActive : ""} href="/admin/resourcing">
+              Resourcing calendar
+            </Link>
+            <Link
+              className={current === "/admin/technology-requests" ? styles.navActive : ""}
+              href="/admin/technology-requests"
+            >
+              Technology requests
+            </Link>
+            <Link className={current === "/admin/settings" ? styles.navActive : ""} href="/admin/settings">
+              Hub settings
+            </Link>
+          </div>
+
+          <div className={styles.section}>
+            <p className={styles.sectionLabel}>Training</p>
+            <div className={trainingOpen ? styles.submenuOpen : styles.submenu}>
+              <Link className={current === "/admin/customers" ? styles.subnavActive : styles.subnav} href="/admin/customers">
+                Customers
+              </Link>
+              <Link
+                className={current === "/admin/customers/new" ? styles.subnavActive : styles.subnav}
+                href="/admin/customers/new"
+              >
+                New customer
+              </Link>
+              <Link className={current === "/admin/sessions" ? styles.subnavActive : styles.subnav} href="/admin/sessions">
+                Sessions
+              </Link>
+              <Link
+                className={current === "/admin/sessions/new" ? styles.subnavActive : styles.subnav}
+                href="/admin/sessions/new"
+              >
+                New session
+              </Link>
+              <Link
+                className={current === "/admin/registrations" ? styles.subnavActive : styles.subnav}
+                href="/admin/registrations"
+              >
+                Registrations
+              </Link>
+            </div>
+          </div>
+
           <form
             action={async () => {
               "use server";
