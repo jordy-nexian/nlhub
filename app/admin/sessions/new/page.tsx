@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { AdminShell } from "@/components/admin-shell";
 import { prisma } from "@/lib/prisma";
 import { ensureAppData } from "@/lib/bootstrap";
+import { sendWebhook } from "@/lib/webhooks";
 
 export const dynamic = "force-dynamic";
 
@@ -34,7 +35,12 @@ export default async function NewSessionPage() {
               meetingUrl: String(formData.get("meetingUrl") || "") || null,
               bookingToken: `${tokenBase}-${crypto.randomUUID().slice(0, 6)}`,
               portalToken: `portal-${tokenBase}-${crypto.randomUUID().slice(0, 6)}`
-            }
+            },
+            include: { customer: true }
+          });
+
+          await sendWebhook("session.created", {
+            session
           });
 
           redirect(`/admin/sessions/${session.id}`);

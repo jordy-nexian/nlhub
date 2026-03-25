@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { ensureAppData } from "@/lib/bootstrap";
+import { sendWebhook } from "@/lib/webhooks";
 
 export async function GET() {
   await ensureAppData();
@@ -28,7 +29,12 @@ export async function POST(request: Request) {
       meetingUrl: payload.meetingUrl || null,
       bookingToken: payload.bookingToken || crypto.randomUUID(),
       portalToken: payload.portalToken || `portal-${crypto.randomUUID()}`
-    }
+    },
+    include: { customer: true }
+  });
+
+  await sendWebhook("session.created", {
+    session
   });
 
   return NextResponse.json({ session }, { status: 201 });
