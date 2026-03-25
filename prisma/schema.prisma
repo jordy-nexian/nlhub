@@ -32,7 +32,7 @@ model TrainingSession {
   capacity       Int        @default(1)
   seatsBooked    Int        @default(0)
   status         String     @default("SCHEDULED")
-  teamsMeetingID String?
+  teamsMeetingId String?
   meetingUrl     String?
   customerId     String?
   customer       Customer?  @relation(fields: [customerId], references: [id], onDelete: SetNull)

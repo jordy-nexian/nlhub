@@ -40,7 +40,7 @@ export async function POST(request: Request) {
   const updatedSession = webhookResponse?.id
     ? await prisma.trainingSession.update({
         where: { id: session.id },
-        data: { teamsMeetingID: webhookResponse.id },
+        data: { teamsMeetingId: webhookResponse.id },
         include: { customer: true }
       })
     : session;

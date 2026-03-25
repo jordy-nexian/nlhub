@@ -46,7 +46,7 @@ export default async function NewSessionPage() {
           if (webhookResponse?.id) {
             await prisma.trainingSession.update({
               where: { id: session.id },
-              data: { teamsMeetingID: webhookResponse.id }
+              data: { teamsMeetingId: webhookResponse.id }
             });
           }
 
