@@ -1,0 +1,60 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Customer {
+  id            String           @id @default(cuid())
+  companyName   String
+  contactName   String
+  email         String           @unique
+  phone         String?
+  actionstepOrg String?
+  notes         String?
+  status        String           @default("ACTIVE")
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  sessions      TrainingSession[]
+  bookingLinks  BookingLink[]
+}
+
+model TrainingSession {
+  id             String     @id @default(cuid())
+  title          String
+  description    String?
+  trainerName    String
+  startsAt       DateTime
+  endsAt         DateTime
+  capacity       Int        @default(1)
+  seatsBooked    Int        @default(0)
+  status         String     @default("SCHEDULED")
+  meetingUrl     String?
+  customerId     String?
+  customer       Customer?  @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  bookingToken   String?    @unique
+  portalToken    String?    @unique
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+}
+
+model BookingLink {
+  id           String    @id @default(cuid())
+  token        String    @unique
+  label        String
+  isActive     Boolean   @default(true)
+  customerId   String?
+  customer     Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  expiresAt    DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model AppSetting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}

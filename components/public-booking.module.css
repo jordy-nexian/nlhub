@@ -1,0 +1,127 @@
+.page {
+  min-height: 100vh;
+  padding: 40px 24px;
+  background:
+    radial-gradient(circle at top left, rgba(47, 112, 177, 0.24), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(42, 154, 200, 0.18), transparent 22%),
+    linear-gradient(180deg, #061626 0%, #0b2137 100%);
+  color: var(--text-dark);
+}
+
+.grid {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.25fr 0.95fr;
+  gap: 16px;
+}
+
+.panel {
+  padding: 30px 22px;
+  border-radius: var(--radius-xl);
+  background: var(--surface-dark);
+  border: 1px solid var(--border-dark);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+}
+
+.eyebrow {
+  color: #4fb6fb;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  font-size: 0.82rem;
+}
+
+.copy,
+.subtle {
+  color: var(--muted-dark);
+  line-height: 1.55;
+}
+
+.pill {
+  display: inline-flex;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(99, 150, 197, 0.3);
+  margin-top: 10px;
+}
+
+.slots {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.slotButton,
+.slotButtonActive,
+.submit {
+  border: 0;
+  border-radius: 18px;
+}
+
+.slotButton,
+.slotButtonActive {
+  padding: 14px;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
+}
+
+.slotButtonActive {
+  background: linear-gradient(180deg, #38a6fa 0%, #257ecd 100%);
+}
+
+.slotTime {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.slotMeta {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.9rem;
+}
+
+.form {
+  display: grid;
+  gap: 14px;
+}
+
+.form label {
+  display: grid;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.form input,
+.form textarea {
+  background: rgba(4, 15, 26, 0.66);
+  color: var(--text-dark);
+  border-color: rgba(114, 148, 192, 0.22);
+}
+
+.selection {
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px dashed rgba(99, 150, 197, 0.4);
+}
+
+.submit {
+  padding: 14px 16px;
+  background: linear-gradient(180deg, #3194e8 0%, #2367a6 100%);
+  color: white;
+  font-weight: 800;
+}
+
+.notice {
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-dark);
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

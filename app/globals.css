@@ -1,0 +1,88 @@
+:root {
+  --bg: #f3f7fb;
+  --bg-dark: #08192a;
+  --surface: #ffffff;
+  --surface-2: #f8fbff;
+  --surface-dark: rgba(10, 28, 47, 0.92);
+  --border: #dde7f1;
+  --border-dark: rgba(113, 157, 201, 0.24);
+  --text: #13263d;
+  --text-dark: #edf5ff;
+  --muted: #6d8098;
+  --muted-dark: #9cb4d2;
+  --accent: #33a0f0;
+  --accent-strong: #1d78ca;
+  --success: #57b88d;
+  --warning: #e8ab45;
+  --danger: #e27373;
+  --shadow: 0 20px 50px rgba(10, 24, 44, 0.08);
+  --radius-xl: 30px;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+  --font-sans: "Manrope", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(76, 153, 220, 0.15), transparent 28%),
+    linear-gradient(180deg, #eff5fb 0%, #f7fafc 100%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.app-frame {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+  margin-top: 0;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+}
+
+button {
+  cursor: pointer;
+}
