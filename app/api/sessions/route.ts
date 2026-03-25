@@ -33,9 +33,17 @@ export async function POST(request: Request) {
     include: { customer: true }
   });
 
-  await sendWebhook("session.created", {
+  const webhookResponse = (await sendWebhook("session.created", {
     session
-  });
+  })) as { id?: string } | null;
 
-  return NextResponse.json({ session }, { status: 201 });
+  const updatedSession = webhookResponse?.id
+    ? await prisma.trainingSession.update({
+        where: { id: session.id },
+        data: { teamsMeetingID: webhookResponse.id },
+        include: { customer: true }
+      })
+    : session;
+
+  return NextResponse.json({ session: updatedSession }, { status: 201 });
 }

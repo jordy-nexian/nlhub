@@ -29,13 +29,24 @@ export async function sendWebhook(event: string, payload: Record<string, unknown
   const url = await getWebhookUrl(event);
 
   if (!url) {
-    return;
+    return null;
   }
 
-  await fetch(url, {
+  const response = await fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ event, ...payload }),
     cache: "no-store"
   });
+
+  if (!response.ok) {
+    throw new Error(`Webhook request failed for ${event}: ${response.status} ${response.statusText}`);
+  }
+
+  const contentType = response.headers.get("content-type") ?? "";
+  if (!contentType.includes("application/json")) {
+    return null;
+  }
+
+  return response.json();
 }

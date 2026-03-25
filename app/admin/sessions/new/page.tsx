@@ -39,9 +39,16 @@ export default async function NewSessionPage() {
             include: { customer: true }
           });
 
-          await sendWebhook("session.created", {
+          const webhookResponse = (await sendWebhook("session.created", {
             session
-          });
+          })) as { id?: string } | null;
+
+          if (webhookResponse?.id) {
+            await prisma.trainingSession.update({
+              where: { id: session.id },
+              data: { teamsMeetingID: webhookResponse.id }
+            });
+          }
 
           redirect(`/admin/sessions/${session.id}`);
         }}

@@ -72,6 +72,7 @@ export default async function SessionDetailPage({ params }: { params: { id: stri
             <p>{formatDateTime(session.startsAt)}</p>
             <p>{session.customer?.companyName ?? "No customer assigned"}</p>
             <p>{session.status}</p>
+            <p>{session.teamsMeetingID ?? "No Teams meeting linked yet"}</p>
           </article>
         </div>
       </section>
