@@ -10,7 +10,15 @@ export default async function AdminPage() {
 
   const booked = sessions.filter((session) => session.status !== "AVAILABLE").length;
   const available = sessions.filter((session) => session.status === "AVAILABLE").length;
-  const webhook = settings.find((setting) => setting.key === "booking_webhook_url")?.value;
+  const webhookCount = settings.filter(
+    (setting) =>
+      [
+        "booking_webhook_url",
+        "meeting_webhook_url",
+        "attendee_webhook_url",
+        "attendance_webhook_url"
+      ].includes(setting.key) && Boolean(setting.value)
+  ).length;
 
   return (
     <AdminShell current="/admin" subtitle="A shared workspace for training, resourcing, and internal legal operations requests." title="Hub Dashboard">
@@ -52,7 +60,7 @@ export default async function AdminPage() {
           </div>
           <div style={{ marginTop: 18, padding: 16, borderRadius: 18, background: "var(--surface-2)" }}>
             <p style={{ color: "var(--muted)", marginBottom: 6 }}>Webhook status</p>
-            <strong>{webhook ? "Configured" : "Not configured"}</strong>
+            <strong>{webhookCount ? `${webhookCount}/4 configured` : "Not configured"}</strong>
           </div>
         </article>
       </section>

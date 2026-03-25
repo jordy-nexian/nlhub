@@ -180,14 +180,40 @@ export async function ensureAppData() {
         });
       }
 
-      await prisma.appSetting.upsert({
-        where: { key: "booking_webhook_url" },
-        update: {},
-        create: {
-          key: "booking_webhook_url",
-          value: process.env.N8N_BOOKING_WEBHOOK_URL ?? ""
-        }
-      });
+      await Promise.all([
+        prisma.appSetting.upsert({
+          where: { key: "booking_webhook_url" },
+          update: {},
+          create: {
+            key: "booking_webhook_url",
+            value: process.env.N8N_BOOKING_WEBHOOK_URL ?? ""
+          }
+        }),
+        prisma.appSetting.upsert({
+          where: { key: "meeting_webhook_url" },
+          update: {},
+          create: {
+            key: "meeting_webhook_url",
+            value: process.env.N8N_MEETING_WEBHOOK_URL ?? ""
+          }
+        }),
+        prisma.appSetting.upsert({
+          where: { key: "attendee_webhook_url" },
+          update: {},
+          create: {
+            key: "attendee_webhook_url",
+            value: process.env.N8N_ATTENDEE_WEBHOOK_URL ?? ""
+          }
+        }),
+        prisma.appSetting.upsert({
+          where: { key: "attendance_webhook_url" },
+          update: {},
+          create: {
+            key: "attendance_webhook_url",
+            value: process.env.N8N_ATTENDANCE_WEBHOOK_URL ?? ""
+          }
+        })
+      ]);
     })();
   }
 
